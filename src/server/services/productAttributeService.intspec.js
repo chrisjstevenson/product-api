@@ -15,4 +15,12 @@ describe('Product Attribute Service', function () {
 				done();
 			});
 	});
+
+	it('should have offerPrice.', function (done) {
+		productAttributeService.fetchProduct('13860428')
+			.then(response => {
+				expect(response.product.price.offerPrice.price).to.be.a('number');
+				done();
+			});
+	})
 });

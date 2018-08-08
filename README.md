@@ -5,7 +5,8 @@
 This is an example of a RESTful service that consumes product attribute data from a source system and then
 hydrates that model with pricing data from an mongodb database.
 
-The service is currently running in Kubernetes and can be demonstrated via the following URLs:
+The service is currently running in Kubernetes and can be accessed from any the following URLs, or any item additional item identifiers.
+
 http://optmizr.io:8080/api/product/13860428  
 http://optmizr.io:8080/api/product/53589104  
 http://optmizr.io:8080/api/product/51000037
@@ -74,8 +75,7 @@ yarn test
 ```
 
 ##### Testing Methodology
-I elected to use integration tests as the primary method of testing over unit - I did this because
-I felt that the interaction between services was more important to the system under test that
+I elected to use integration tests as the primary method of testing over unit - I felt that the interaction between services was more important to the system than
 the logic within each smaller component.
 
 ## Deployments
