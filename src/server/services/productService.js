@@ -13,6 +13,7 @@ productService.getProduct = (id) => {
 			}
 
 			// Product is a thing, but we might not have a price currently stored for it
+			// so use the system of record as a default and override from mongodb if required.
 			let currentPrice = productAttributeResult.product.price.listPrice.price;
 			if(productPriceResult) {
 				currentPrice = productPriceResult.current_price.value;

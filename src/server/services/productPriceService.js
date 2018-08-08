@@ -10,6 +10,7 @@ productPriceService.getProduct = (id) => {
 
 productPriceService.saveProduct = (id, user, updates) => {
 	let isNew = false;
+	updates.id = id;
 
 	return Product.findOne({ id: id })
 		.then(product => {
