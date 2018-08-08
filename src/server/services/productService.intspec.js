@@ -7,7 +7,7 @@ const productService = require('./productService');
 describe('Product Service', function () {
 
 	before(function (done) {
-		mongoose.connect(config.mongoDbConnectionString, { useNewUrlParser: true });
+		mongoose.connect(config.mongoDbConnectionString);
 		const db = mongoose.connection;
 		db.on('error', console.error.bind(console, '[x] Mongodb connection error'));
 		db.once('open', function () {
@@ -19,7 +19,6 @@ describe('Product Service', function () {
 	after(done => {
 		mongoose.connection.close(done);
 	});
-
 
 	it('should get aggregate product.', (done) => {
 		productService.getProduct(13860428)

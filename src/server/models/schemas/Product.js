@@ -5,8 +5,14 @@ const Product = new mongoose.Schema({
 		type: String,
 		minlength: 1
 	},
-	displayName: String,
-	price: Number,
+	current_price: {
+		value: {
+			type: Number
+		},
+		currency_code: {
+			type: String
+		}
+	},
 	createdBy : {
 		type : String,
 	},

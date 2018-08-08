@@ -12,11 +12,10 @@ productService.getProduct = (id) => {
 				return null;
 			}
 
-			// Product is a thing, but we don't have a priced currently stored for it
-			if(!productPriceResult) {
-				productPriceResult = {
-					price: productAttributeResult.product.price.listPrice.price,
-				}
+			// Product is a thing, but we might not have a price currently stored for it
+			let currentPrice = productAttributeResult.product.price.listPrice.price;
+			if(productPriceResult) {
+				currentPrice = productPriceResult.current_price.value;
 			}
 
 			// Return a new object with only the attributes we want to display
@@ -24,7 +23,7 @@ productService.getProduct = (id) => {
 				id: id,
 				name: productAttributeResult.product.item.product_description.title,
 				current_price: {
-					value: productPriceResult.price,
+					value: currentPrice,
 					currency_code: 'USD'
 				}
 			}

@@ -7,7 +7,7 @@ const productPriceService = require('./productPriceService');
 describe('Product Price Service ', function () {
 
 	before(function (done) {
-		mongoose.connect(config.mongoDbConnectionString, { useNewUrlParser: true });
+		mongoose.connect(config.mongoDbConnectionString);
 		const db = mongoose.connection;
 		db.on('error', console.error.bind(console, '[x] Mongodb connection error'));
 		db.once('open', function () {
@@ -23,7 +23,10 @@ describe('Product Price Service ', function () {
 	it('should create product.', (done) => {
 		const newProduct = {
 			id: '111',
-			price: 99.99,
+			current_price: {
+				value: 99.99,
+				currency_code: 'USD'
+			},
 		};
 
 		productPriceService.saveProduct(newProduct.id, 'intspecs', newProduct)
@@ -31,7 +34,7 @@ describe('Product Price Service ', function () {
 				expect(result.id).to.equal(newProduct.id);
 				expect(result.createdBy).to.equal('intspecs');
 				expect(result.modifiedBy).to.equal('intspecs');
-				expect(result.price).to.equal(99.99);
+				expect(result.current_price.value).to.equal(99.99);
 				done();
 			})
 	});
@@ -39,7 +42,10 @@ describe('Product Price Service ', function () {
 	it('should update product.', (done) => {
 		const updatedProduct = {
 			id: '111',
-			price: 1.00,
+			current_price: {
+				value: 1.00,
+				currency_code: 'USD'
+			},
 		};
 
 		productPriceService.saveProduct(updatedProduct.id, 'intspecs', updatedProduct)
@@ -47,7 +53,7 @@ describe('Product Price Service ', function () {
 				expect(result.id).to.equal(updatedProduct.id);
 				expect(result.createdBy).to.equal('intspecs');
 				expect(result.modifiedBy).to.equal('intspecs');
-				expect(result.price).to.equal(1.00);
+				expect(result.current_price.value).to.equal(1.00);
 				done();
 			})
 	});
@@ -56,8 +62,8 @@ describe('Product Price Service ', function () {
 		productPriceService.getProduct('111')
 			.then(result => {
 				expect(result.id).to.equal('111');
-				expect(result.price).to.be.a('number');
-				expect(result.price).to.equal(1.00);
+				expect(result.current_price.value).to.be.a('number');
+				expect(result.current_price.value).to.equal(1.00);
 				done();
 			});
 	});

@@ -26,7 +26,7 @@ productController.getProduct = (req, res) => {
 productController.saveProduct = (req, res) => {
 
 	log.info(`Request to save product:  ${JSON.stringify(req.body)}`);
-	return productPriceService.saveProduct(req.body.id, 'api-user', req.body)
+	return productPriceService.saveProduct(req.params.id, 'api-user', req.body)
 		.then(savedProduct => {
 			return res.status(200).json({ message: "Product data updated successfully"});
 		})

@@ -31,7 +31,7 @@ function connectToMongoose() {
 		log.warn('MongoDB disconnected!');
 	});
 
-	return mongoose.connect(url, { useNewUrlParser: true })
+	return mongoose.connect(url)
 		.then(() => {
 			log.info(`connected to ${url}`);
 		})
